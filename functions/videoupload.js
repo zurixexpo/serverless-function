@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     await require('fs').promises.writeFile(`./public/${fileName}`, file); // write the file to your site's published files
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'File uploaded successfully.' }),
+      body: JSON.stringify({ message: 'File uploaded successfully.', url: fileName }),
     };
   } catch (error) {
     console.error('Error writing file:', error);
