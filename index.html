@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>upload to netlify</title>
+</head>
+<body>
+<form id="upload-form">
+  <input type="file" name="file" accept="video/*" />
+  <button type="submit">Upload Video</button>
+</form>
+
+<script>
+  const form = document.getElementById('upload-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    try {
+      const response = await fetch('/.netlify/functions/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('File uploaded successfully.');
+      } else {
+        console.error('Error uploading file:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  });
+</script>
+
+</body>
+</html>
